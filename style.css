@@ -1,0 +1,20 @@
+.board{
+  max-width: 250px;
+  float:left;
+  padding:0 0;
+  margin:10px auto;
+  position:relative;
+  z-index: 999;
+}
+div {
+  box-sizing: border-box;
+}
+.board>.square{
+  width:25px;
+  height:25px;
+  background:#F0EFF5;
+  border: 1px solid #010086;
+  display: inline-block;
+  margin-bottom: -6px;
+  transition: all ease .2s;
+}
