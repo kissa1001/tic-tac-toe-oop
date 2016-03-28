@@ -1,9 +1,9 @@
-$board = $('.board');
-var Player = function(name, sign, gridSize){
+var app = angular.module('game',[])
+  .controller('Ctrl', function($scope){
+    
+var Player = function(name, sign){
   this.name = name;
   this.sign = sign;
-  this.populate();
-  this.setGrid(gridSize);
 };
 
 var TicTacToe = function(players){
@@ -14,28 +14,6 @@ var TicTacToe = function(players){
     ];
     this.players = players;
     this.filledSquares = 0;
-};
-
-TicTacToe.prototype.setGrid = function(gridSize){
-    // gridSize should be something like '10x10'
-    var dimensions = gridSize.split('x').map(Number);
-    var rows = dimensions[0],
-        columns = dimensions[1];
-
-    this.grid = new Array(rows).fill(0).map(function(row){
-        return new Array(columns).fill(EMPTY);
-    });
-};
-
-TicTacToe.prototype.prototype.populate = function(){
-    var self = this;
-    this.board.grid.forEach(function(line, line_index) {
-        line.forEach(function(cell, cell_index) {
-            $('<div class="square"></div>')
-            .data('board-position', [line_index, cell_index])
-            .appendTo(self.$board);
-        });
-    });
 };
 
 TicTacToe.prototype.currentPlayer = function() {
@@ -94,13 +72,21 @@ TicTacToe.prototype.winner = function() {
     return this.playerBySign(winner);
 };
 
-var ttt = new TicTacToe([
-    new Player('lina', 'x'),
-    new Player('capi', 'o')
-],'3x3', 3);
+// var ttt = new TicTacToe([
+//     new Player('lina', 'x'),
+//     new Player('capi', 'o')
+// ]);
 
-ttt.move('lina', 0, 0);
-ttt.move('capi', 0, 2);
-ttt.move('lina', 1, 0);
-ttt.move('capi', 1, 1);
-ttt.move('lina', 2, 0);
+
+
+    // $scope.board =[
+  //       [1, 2, 3],
+  //       [4, 5, 6],
+  //       [9, 8, 7]
+  //   ];
+  $scope.ttt = new TicTacToe([
+                new Player('lina', 'x'),
+                new Player('capi', 'o')
+  ]);
+  $scope.board = $scope.ttt.board;
+});
