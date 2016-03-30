@@ -1,10 +1,29 @@
-
+body{
+  background:url('img/background.jpg');
+}
+body h1{
+  color:#fff;
+  font-family: 'Cabin Sketch', cursive;
+  font-size: 5em;
+  margin-bottom: 1em;
+}
+body h4{
+  color:#fff;
+  font-size: 1.5em;
+}
+label{
+  color:#fff;
+  font-family: 'Cabin Sketch', cursive;
+  font-size: 2em;
+}
 div {
   box-sizing: border-box;
 }
 
 table {
-  border: 1px solid;
+  border: 1px #fff solid;
+  font-family: 'Cabin Sketch', cursive;
+  color:#fff;
 }
 
 table td {
@@ -13,11 +32,7 @@ table td {
   height: 100px;
   text-align: center;
   font-size: 250%;
-  border: 1px solid;
-}
-
-.gameWrap{
-	display:none;
+  border: 1px #fff solid;
 }
 
 .login-form {
@@ -25,30 +40,69 @@ table td {
   margin-top: -100px;
   position: absolute;
   text-align: center;
-  top: 30%;
+  top: 50%;
   width: 100%;
   background:transparent;
 }
+.login-form input{
+  border:none;
+  background: transparent;
+  border-bottom: 1px solid #fff;
+  font-family: 'Cabin Sketch', cursive;
+  color:#fff;
+  font-size: 1.8em;
+}
+.usernameInput{
+  width:7em;
+  height:2em;
+}
+.signInput{
+  width:3em;
+  height:2em;
+}
+.btn{
+  font-family: 'Cabin Sketch', cursive;
+}
+/*Chat Box*/
+.main{
+  background: rgba(0, 0, 0, 0.65);
+  box-shadow: 1px 1px 12px rgba(225, 225, 225, 0.5);
+  border-radius: 0.2em;
+}
+#chat{
+  padding:1em 3em;
+  overflow-y: scroll;
+  font-family: 'Cabin Sketch', cursive;
+  font-size:1.2em;
+  color:#fff;
+  height:240px;
+}
+#input{
+  padding:1.2em 1em;
+  font-family: 'Cabin Sketch', cursive;
+}
+#status{
+  color:#363636;
+}
 
-.login-form input {
-  background-color:transparent;
-  border: none;
-  border-bottom: 2px solid #000;
-  outline: none;
-  padding-bottom: 5px;
-  text-align: center;
-  width: 400px;
-}
-.title {
-  font-size: 3em;
-  color:#000;
-}
-input {
-  font-size: 200%;
-  letter-spacing: 3px;
+/*Scrollbar*/
+#chat::-webkit-scrollbar {
+  width: 8px;
 }
 
-.title, input {
-  color: #000;
-  font-weight: 100;
+#chat.thin::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #888;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(100,100,100,0.4); 
 }

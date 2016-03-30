@@ -12,6 +12,8 @@ io.on('connection', function(socket){
 	socket.on('join', function(name, sign){
     	socket.nickname = name;
     	socket.sign = sign;
+        socket.broadcast.emit('join', name);
+        socket.emit('join',name);
         console.log(name + ' with sign: '+ sign + ' connected');
         connectCounter++;
         console.log('Connected users: ' + connectCounter); 
@@ -20,6 +22,17 @@ io.on('connection', function(socket){
     socket.on('disconnect', function() {
         connectCounter--;
         console.log('Connected users: ' + connectCounter);
+    });
+    //User is typing
+    socket.on("sender", function (data) {
+        socket.broadcast.emit("sender", data); 
+    });
+
+    socket.on('message', function(message) {
+        var nickname = socket.nickname;
+        console.log(nickname + ' said:', message);
+        socket.broadcast.emit('message', nickname + ': ' + message);
+        socket.emit('message', 'Me: ' + message);
     });
 });
 

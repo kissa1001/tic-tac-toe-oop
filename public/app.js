@@ -1,30 +1,50 @@
 $(function() {
-    //Variables
-    var socket = io();
-    var nickInput = $('.usernameInput');
-    var signInput = $('.signInput');
-    var loginPage = $('.login-form');
-    var gamePage = $('.gameWrap');
+	var socket=io();
+	var input = $('.msgInput');
+    var messages = $('#messages');
     var nickname;
-    var sign;
 
-    //Create username
-    socket.on('connect', function(data){
-        function setUsername () {
-            nickname = nickInput.val();
-            sign = signInput.val();
-            // If the username is valid
-            if (nickname && sign) {
-                loginPage.fadeOut();
-                socket.emit('join', nickname, sign);
-                gamePage.show();
-            }
-        }
-        signInput.on('keydown',function (event) {
-            // When the client hits ENTER on their keyboard
-            if (event.which === 13) {
-                setUsername();
-            }
+    $('form:first *:input[type!=hidden]:first').focus();
+
+    //Scrollbar
+    $("#chat").addClass("thin");
+
+    $("#chat").mouseover(function(){
+        $(this).removeClass("thin");
+    });
+    $("#chat").mouseout(function(){
+        $(this).addClass("thin");
+    });
+    $("#chat").scroll(function () {
+        $("#chat").addClass("thin");
+    });
+
+    //Add message
+    var addMessage = function(message) {
+        messages.append('<div>' + message + '</div>');
+    };
+
+    //User is typing
+    $("input").on("keyup", function (event) {
+        socket.emit("sender", {
+            nickname: nickname
         });
     });
+    socket.on("sender", function (data) {
+        $("#status").html(data.nickname + " is typing");
+        setTimeout(function () {
+            $("#status").html('');
+        }, 3000);
+    });
+
+    input.on('keydown', function(event) {
+        if (event.keyCode != 13) {
+            return;
+        }
+
+        var message = input.val();
+        socket.emit('message', message);
+        input.val('');
+    });
+    socket.on('message',addMessage)
 });
