@@ -8,8 +8,16 @@ var TicTacToe = function(players){
         [null, null, null],
         [null, null, null]
     ];
-    this.players = players;
+    this.players = players||[];
     this.filledSquares = 0;
+};
+
+TicTacToe.prototype.addPlayer = function(player) {
+  if (this.players.length < 2) {
+    this.players.push(player);
+  } else {
+     console.log('Game already has 2 players');
+  }
 };
 
 TicTacToe.prototype.currentPlayer = function() {
@@ -48,22 +56,22 @@ TicTacToe.prototype.validatePlayer = function(name) {
 
 TicTacToe.prototype.winner = function() {
     var winner;
-    
+
     this.board.forEach(function(line){
         if (line[0] !== null && line[0] === line[1] && line[1] === line[2]) {
             winner = line[0];
         }
     });
-    
+
     var board = this.board;
     [0, 1, 2].forEach(function(index){
         var column = board.map(function(line){ return line[index]; });
         if (column[0] !== null && column[0] == column[1] && column[1] == column[2]) { winner = column[0]; }
     });
-    
+
     if (this.board[0][0] !== null && this.board[0][0] == this.board[1][1] && this.board[1][1] == this.board[2][2]) { winner = this.board[0][0]; }
-    
+
     if (this.board[2][0] !== null && this.board[2][0] == this.board[1][1] && this.board[1][1] == this.board[0][2]) { winner = this.board[2][0]; }
-    
+
     return this.playerBySign(winner);
 };
